@@ -1,11 +1,11 @@
 {
-  "name": "album-art",
+  "name": "movie-art",
   "version": "1.0.1",
-  "description": "Get an album or artist image url in node: The Beatles ➔ http://path/to/beatles.jpg",
+  "description": "Get a movie poster image url in node: Oceans Eleven ➔ http://path/to/oceans_eleven_poster.jpg",
   "license": "MIT",
-  "repository": "lacymorrow/album-art",
+  "repository": "lacymorrow/movie-art",
   "bin": {
-    "album-art": "cli.js"
+    "movie-art": "cli.js"
   },
   "author": {
     "name": "Lacy Morrow",
@@ -26,7 +26,9 @@
     "cli",
     "bin",
     "app",
-    "album",
+    "movie",
+    "image",
+    "poster",
     "url",
     "uri",
     "path"

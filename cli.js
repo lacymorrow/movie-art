@@ -1,19 +1,18 @@
 #!/usr/bin/env node
 'use strict';
 var pkg = require('./package.json');
-var albumArt = require('./index');
-var artist = process.argv[2];
-var sizes = ['small', 'medium', 'large', 'extralarge', 'mega'];
+var movieArt = require('./index');
+var movie = process.argv[2];
 
 function help() {
 	console.log(pkg.description);
 	console.log('');
 	console.log('Usage');
-	console.log('  $ album-art artist [album] [small|medium|large|extralarge|mega]');
+	console.log('  $ movie-art movie [year]');
 	console.log('');
 	console.log('Example');
-	console.log('  $ album-art \'The Beatles\' \'White Album\'');
-	console.log('  http://path/to/beatles/album.jpg');
+	console.log('  $ movie-art \'Oceans Eleven\' 1960');
+	console.log('  http://path/to/oceans_eleven_poster.jpg');
 }
 
 if (process.argv.indexOf('-h') !== -1 || process.argv.indexOf('--help') !== -1) {
@@ -38,13 +37,7 @@ var argc = process.argv.length;
 if (argc < 3){
 	help();
 } else if (argc === 3){
-	albumArt(artist, null, null, cb);
-} else if (argc === 4 && sizes.indexOf(process.argv[3]) === -1){
-	albumArt(artist, process.argv[3], null, cb);
-} else if (argc === 4){
-	albumArt(artist, null, process.argv[3], cb);
-} else if (sizes.indexOf(process.argv[4]) !== -1){
-	albumArt(artist, process.argv[3], process.argv[4], cb);
+	movieArt(movie, null, cb);
 } else {
-	albumArt(artist, process.argv[3], null, cb);
+	movieArt(movie, process.argv[3], cb);
 }

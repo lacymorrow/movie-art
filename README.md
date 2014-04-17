@@ -1,12 +1,12 @@
-# album-art [![Build Status](https://travis-ci.org/lacymorrow/album-art.svg?branch=master)](https://travis-ci.org/lacymorrow/album-art)
+# move-art [![Build Status](https://travis-ci.org/lacymorrow/movie-art.svg?branch=master)](https://travis-ci.org/lacymorrow/movie-art)
 
-> Get an album or artist image url in node: "The Beatles" ➔ http://path/to/beatles.jpg
+> Get a movie poster image url in node: "Oceans Eleven" ➔ http://path/to/oceans_eleven_poster.jpg
 
 
 ## Install
 
 ```bash
-$ npm install --save album-art
+$ npm install --save movie-art
 ```
 
 
@@ -14,43 +14,37 @@ $ npm install --save album-art
 
 ```js
 
-var albumArt = require('album-art');
+var movieArt = require('movie-art');
 
-albumArt('The Beatles', function (err, url) {
+movieArt('Oceans Eleven', function (err, url) {
     console.log(url);
-    //=> 'http://path/to/beatles.jpg'
+    //=> http://path/to/oceans_eleven_poster.jpg
 });
 
-albumArt('The Beatles', 'Abbey Road', 'large', function (err, url) {
+movieArt('Oceans Eleven', '1960', function (err, url) {
     console.log(url);
-    //=> http://path/to/beatles/abbey_road_large.jpg
+    //=> http://path/to/oceans_eleven_poster_1960.jpg
 });
 
 ```
 
 ## API
 
-### albumArt(artist [, album] [, size ] , callback)
+### movieArt(movie [, year ] , callback)
 
-#### artist
+#### movie
 
 *Required*  
 Type: `string`
 
-Artist to search for.
+Movie to search for.
 
-#### album
 
-Type: `string`
-
-Album to search for.
-
-#### size
+#### year
 
 Type: `string` 
-*possible values:* `small`, `medium`, `large`, `extralarge`, `mega`
 
-Size of image to return.
+Optional movie year.
 
 #### callback(err, url)
 
@@ -60,20 +54,20 @@ Size of image to return.
 You can also use it as a CLI app by installing it globally:
 
 ```bash
-$ npm install --global album-art
+$ npm install --global movie-art
 ```
 
 #### Usage
 
 ```bash
-$ album-art --help
+$ movie-art --help
 
 Usage
-  $ album-art [artist] [album] [small|medium|large|extralarge|mega]
+  $ movie-art movie [year]
 
 Example
-  $ album-art 'The Beatles' 'Abbey Road' large
-  http://path/to/beatles/abbey_road_large.jpg
+  $ movie-art 'Oceans Eleven' 1960
+  http://path/to/oceans_eleven_poster_1960.jpg
 ```
 
 

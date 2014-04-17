@@ -1,4 +1,4 @@
-# move-art [![Build Status](https://travis-ci.org/lacymorrow/movie-art.svg?branch=master)](https://travis-ci.org/lacymorrow/movie-art)
+# movie-art [![Build Status](https://travis-ci.org/lacymorrow/movie-art.svg?branch=master)](https://travis-ci.org/lacymorrow/movie-art)
 
 > Get a movie poster image url in node: "Oceans Eleven" ➔ http://path/to/oceans_eleven_poster.jpg
 

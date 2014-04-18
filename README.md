@@ -26,6 +26,11 @@ movieArt('Oceans Eleven', '1960', function (err, url) {
     //=> http://path/to/oceans_eleven_poster_1960.jpg
 });
 
+movieArt('Oceans Eleven', '1960', 'w92', function (err, url) {
+    console.log(url);
+    //=> http://path/to/oceans_eleven_poster_1960_small.jpg
+});
+
 ```
 
 ## API
@@ -49,6 +54,17 @@ Optional movie year.
 #### callback(err, url)
 
 
+#### size
+
+Type: `string` 
+
+Requested poster size. 
+Call `movieArt(function(e){console.log(e);});` or run the CLI command with no arguments to retrieve the list of available sizes.
+*possible values at time of writing:* `w92`, `w154`, `w185`, `w342`, `w500`, `w780`, `original`
+
+#### callback(err, url)
+
+
 ## CLI
 
 You can also use it as a CLI app by installing it globally:
@@ -63,11 +79,11 @@ $ npm install --global movie-art
 $ movie-art --help
 
 Usage
-  $ movie-art movie [year]
+  $ movie-art movie [year] [size]
 
 Example
-  $ movie-art 'Oceans Eleven' 1960
-  http://path/to/oceans_eleven_poster_1960.jpg
+  $ movie-art 'Oceans Eleven' 1960 w92
+  http://path/to/oceans_eleven_poster_1960_small.jpg
 ```
 
 

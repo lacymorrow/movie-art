@@ -60,7 +60,9 @@ Type: `string`
 
 Requested poster size. 
 Call `movieArt(function(e){console.log(e);});` or run the CLI command with no arguments to retrieve the list of available sizes.
+
 *possible values at time of writing:* `w92`, `w154`, `w185`, `w342`, `w500`, `w780`, `original`
+
 
 #### callback(err, url)
 

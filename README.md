@@ -35,7 +35,7 @@ movieArt('Oceans Eleven', '1960', 'w92', function (err, url) {
 
 ## API
 
-### movieArt(movie [, year ] , callback)
+### movieArt(movie [, year ] [, size ], callback)
 
 #### movie
 

@@ -91,4 +91,6 @@ Example
 
 ## License
 
+This package uses data from TMDB. You may consult [TMDB terms of service](https://www.themoviedb.org/documentation/api/terms-of-use) for usage rights.
+
 [MIT](http://opensource.org/licenses/MIT) © [Lacy Morrow](http://lacymorrow.com)

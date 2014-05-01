@@ -51,18 +51,18 @@ function getConfig (search) {
 	  resp.on('end', function(){
 		var json = JSON.parse(data);
 		if (typeof(json.status_message) !== 'undefined'){
-			return search.cb('Got error: ' + json.status_message);
+			search.cb('Got error: ' + json.status_message);
 		} else {
 			search.baseURL = json.images.base_url;
 			search.sizes = json.images.poster_sizes;
 			if(search.movie === null){
-				return search.cb('Available sizes: ' + search.sizes);
+				search.cb('Available sizes: ' + search.sizes);
 			}
 			getMovie(search);
 		}
 	  });
 	}).on("error", function(e){
-		return search.cb('Got error: ' + e.message);
+		search.cb('Got error: ' + e.message);
 	});
 }
 
@@ -76,15 +76,15 @@ function getMovie(search) {
 	  resp.on('end', function(){
 		var json = JSON.parse(data);
 		if (typeof(json.status_message) !== 'undefined'){
-			return search.cb('Got error: ' + json.status_message);
+			search.cb('Got error: ' + json.status_message);
 		} else if (json.results.length === 0){
-			return search.cb('Got error: ' + 'No results found')
+			search.cb('Got error: ' + 'No results found')
 		} else if (search.sizes.indexOf(search.size) !== -1) {
-			return search.cb(null, encodeURI(search.baseURL + search.size + json.results[0].poster_path));
+			search.cb(null, encodeURI(search.baseURL + search.size + json.results[0].poster_path));
 		}
-		return search.cb(null, encodeURI(search.baseURL + search.sizes[search.sizes.length-1] + json.results[0].poster_path));
+		search.cb(null, encodeURI(search.baseURL + search.sizes[search.sizes.length-1] + json.results[0].poster_path));
 	  });
 	}).on("error", function(e){
-		return search.cb('Got error: ' + e.message);
+		search.cb('Got error: ' + e.message);
 	});
 }

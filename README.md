@@ -12,9 +12,19 @@ $ npm install --save movie-art
 
 ## Usage
 
-```js
+Node:
 
-var movieArt = require('movie-art');
+```js var movieArt = require('movie-art');```
+
+AMD:
+
+```js 
+
+require(['path/to/movie-art'], function (movieArt){
+  // use module here
+});
+
+```js
 
 movieArt('Oceans Eleven', function (err, url) {
     console.log(url);

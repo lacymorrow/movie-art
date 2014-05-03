@@ -1,7 +1,24 @@
 'use strict';
 var path = require('path');
+(function (name, definition){
+  if (typeof define === 'function' && define.amd){ // AMD
+    define(definition);
+  } else if (typeof module !== 'undefined' && module.exports) { // Node.js
+    module.exports = definition();
+  } else { // Browser
+    var modl = definition(), global = this, old = global[name];
+    modl.noConflict = function () {
+      global[name] = old;
+      return modl;
+    };
+    global[name] = modl;
+  }
+})(this, function () {
+  // return the module's API
+  return movieArt;
+});
 
-module.exports = function (movie, year, size, cb) {
+function movieArt(movie, year, size, cb) {
 	var search = {
 		key: '9d2bff12ed955c7f1f74b83187f188ae',
 		protocol: require('https'),
@@ -19,10 +36,10 @@ module.exports = function (movie, year, size, cb) {
 	}
 	
 	if (typeof year === 'function') {
-		cb = year;
+		search.cb = year;
 		year = size = null;
 	} else if (typeof size === 'function') {
-		cb = size;
+		search.cb = size;
 		size = null;
 	}
 
@@ -39,8 +56,7 @@ module.exports = function (movie, year, size, cb) {
 		search.year = year;
 		getConfig(search);
 	}
-};
-
+}
 function getConfig (search) {
 	var data = '';
 	search.options.path = encodeURI('/3/configuration?api_key=' + search.key);
@@ -81,8 +97,9 @@ function getMovie(search) {
 			search.cb('Got error: ' + 'No results found')
 		} else if (search.sizes.indexOf(search.size) !== -1) {
 			search.cb(null, encodeURI(search.baseURL + search.size + json.results[0].poster_path));
+		} else {
+			search.cb(null, encodeURI(search.baseURL + search.sizes[search.sizes.length-1] + json.results[0].poster_path));
 		}
-		search.cb(null, encodeURI(search.baseURL + search.sizes[search.sizes.length-1] + json.results[0].poster_path));
 	  });
 	}).on("error", function(e){
 		search.cb('Got error: ' + e.message);

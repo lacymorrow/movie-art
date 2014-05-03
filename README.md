@@ -12,17 +12,23 @@ $ npm install --save movie-art
 
 ## Usage
 
-Node:
+**Node:**
 
-```js var movieArt = require('movie-art');```
+```js 
 
-AMD:
+var movieArt = require('movie-art');
+
+```
+
+**AMD:**
 
 ```js 
 
 require(['path/to/movie-art'], function (movieArt){
   // use module here
 });
+
+```
 
 ```js
 

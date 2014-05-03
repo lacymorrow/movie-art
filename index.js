@@ -1,4 +1,5 @@
 'use strict';
+var path = require('path');
 (function (name, definition){
   if (typeof define === 'function' && define.amd){ // AMD
     define(definition);
@@ -12,7 +13,7 @@
     };
     global[name] = modl;
   }
-})('movieArt', function () {
+})(this, function () {
   // return the module's API
   return movieArt;
 });

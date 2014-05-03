@@ -1,6 +1,4 @@
 'use strict';
-var path = require('path');
-
 module.exports = function (movie, year, size, cb) {
 	var search = {
 		key: '9d2bff12ed955c7f1f74b83187f188ae',

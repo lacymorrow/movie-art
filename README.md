@@ -17,7 +17,6 @@ $ npm install --save movie-art
 ```js 
 
 var movieArt = require('movie-art');
-
 ```
 
 **AMD:**
@@ -27,7 +26,6 @@ var movieArt = require('movie-art');
 require(['path/to/movie-art'], function (movieArt){
   // use module here
 });
-
 ```
 
 ```js
@@ -46,7 +44,6 @@ movieArt('Oceans Eleven', '1960', 'w92', function (err, url) {
     console.log(url);
     //=> http://path/to/oceans_eleven_poster_1960_small.jpg
 });
-
 ```
 
 ## API

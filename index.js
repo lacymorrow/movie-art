@@ -17,10 +17,10 @@ module.exports = function (movie, year, size, cb) {
 	}
 	
 	if (typeof year === 'function') {
-		cb = year;
+		search.cb = year;
 		year = size = null;
 	} else if (typeof size === 'function') {
-		cb = size;
+		search.cb = size;
 		size = null;
 	}
 
@@ -79,8 +79,9 @@ function getMovie(search) {
 			search.cb('Got error: ' + 'No results found')
 		} else if (search.sizes.indexOf(search.size) !== -1) {
 			search.cb(null, encodeURI(search.baseURL + search.size + json.results[0].poster_path));
+		} else {
+			search.cb(null, encodeURI(search.baseURL + search.sizes[search.sizes.length-1] + json.results[0].poster_path));
 		}
-		search.cb(null, encodeURI(search.baseURL + search.sizes[search.sizes.length-1] + json.results[0].poster_path));
 	  });
 	}).on("error", function(e){
 		search.cb('Got error: ' + e.message);

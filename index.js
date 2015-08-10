@@ -1,5 +1,5 @@
 'use strict';
-module.exports = function (movie, year, size, cb) {
+module.exports = function (movie, year, size,type, cb) {
 	var search = {
 		key: '9d2bff12ed955c7f1f74b83187f188ae',
 		protocol: require('https'),
@@ -23,6 +23,16 @@ module.exports = function (movie, year, size, cb) {
 		search.cb = size;
 		size = null;
 	}
+	else if (typeof type === 'function') {
+		search.cb = type;
+		type = null;
+	}
+
+    if(type === null || (type != 'tv' && type != 'movie'))
+    {
+        type = 'movie';
+    }
+    search.type = type;
 
 	if (movie === null){
 		getConfig(search);
@@ -66,7 +76,7 @@ function getConfig (search) {
 
 function getMovie(search) {
 	var data = '';
-	search.options.path = encodeURI('/3/search/movie?api_key=' + search.key + '&query=' + search.movie + ((search.year !== null) ? '&year='+search.year : ''));
+	search.options.path = encodeURI('/3/search/'+search.type+'?api_key=' + search.key + '&query=' + search.movie + ((search.year !== null) ? '&year='+search.year : ''));
 	search.protocol.get(search.options, function(resp){
 	  resp.on('data', function(chunk){
 		data += chunk;

@@ -38,7 +38,7 @@ var argc = process.argv.length;
 if (argc < 3){
 	help();
 } else if (argc === 3){
-	movieArt(movie, null, null, cb);
+	movieArt(movie, null, null, 'tv', cb);
 } else if (argc === 4 && !isNaN(parseFloat(process.argv[3])) && isFinite(process.argv[3])){
 	movieArt(movie, process.argv[3], null, cb);
 } else if (argc === 4){

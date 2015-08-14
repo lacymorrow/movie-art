@@ -1,5 +1,5 @@
 'use strict';
-module.exports = function (movie, year, size,type, cb) {
+module.exports = function (movie, year, size, type, cb) {
 	var search = {
 		key: '9d2bff12ed955c7f1f74b83187f188ae',
 		protocol: require('https'),
@@ -22,8 +22,7 @@ module.exports = function (movie, year, size,type, cb) {
 	} else if (typeof size === 'function') {
 		search.cb = size;
 		size = null;
-	}
-	else if (typeof type === 'function') {
+	} else if (typeof type === 'function') {
 		search.cb = type;
 		type = null;
 	}

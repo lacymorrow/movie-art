@@ -40,7 +40,7 @@ if (argc < 3){
 	help();
 } else if (argc === 3){
 	movieArt(movie, null, null, 'movie', cb);
-} else if (argc === 4 && (!isNaN(parseFloat(process.argv[3])) && isFinite(process.argv[3])){
+} else if (argc === 4 && (!isNaN(parseFloat(process.argv[3])) && isFinite(process.argv[3]))){
 	movieArt(movie, process.argv[3], null, 'movie', cb);
 } else if (argc === 4 && ['movie', 'tv'].indexOf(process.argv[3])){
 	movieArt(movie, null, null, process.argv[3], cb);

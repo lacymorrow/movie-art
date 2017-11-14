@@ -1,5 +1,6 @@
 'use strict';
 module.exports = function (movie, year, size, type, cb) {
+	// We use the var `movie` instead of something generic like `query` because tv support was added later
 	var search = {
 		key: '9d2bff12ed955c7f1f74b83187f188ae',
 		protocol: require('https'),

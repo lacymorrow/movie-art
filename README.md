@@ -1,4 +1,4 @@
-# movie-art [![Build Status](https://travis-ci.org/lacymorrow/movie-art.svg?branch=master)](https://travis-ci.org/lacymorrow/movie-art)
+# movie-art [![npm version](https://badge.fury.io/js/movie-art.svg)](https://badge.fury.io/js/movie-art) [![Build Status](https://travis-ci.org/lacymorrow/movie-art.svg?branch=master)](https://travis-ci.org/lacymorrow/movie-art)
 
 > Get a movie (or TV-series) poster image url in node: "Oceans Eleven" ➔ http://path/to/oceans_eleven_poster.jpg
 

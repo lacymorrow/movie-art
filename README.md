@@ -2,9 +2,7 @@
 
 > Get a movie (or TV-series) poster image url in node: "Oceans Eleven" ➔ http://path/to/oceans_eleven_poster.jpg
 
-<p style="text-align: center;">
-  [![movie-art](demo.svg)]()
-</p>
+<img align="center" src="demo.svg" alt="movie-art demo" />
 
 ## Install
 

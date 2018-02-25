@@ -34,6 +34,6 @@
     "path"
   ],
   "devDependencies": {
-    "mocha": "*"
+    "mocha": "^5.0.1"
   }
 }

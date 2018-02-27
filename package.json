@@ -1,9 +1,11 @@
 {
   "name": "movie-art",
-  "version": "1.0.7",
-  "description": "Get a movie poster image url in node: Oceans Eleven ➔ http://path/to/oceans_eleven_poster.jpg",
+  "version": "2.0.0",
+  "description": "Fetch art for a movie or tv show: 'Oceans Eleven' ➔ http://path/to/oceans_eleven_poster.jpg",
   "license": "MIT",
   "repository": "lacymorrow/movie-art",
+  "main": "index.js",
+  "browser": "index.js",
   "bin": {
     "movie-art": "cli.js"
   },
@@ -16,7 +18,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "ava"
   },
   "files": [
     "cli.js",
@@ -34,6 +36,11 @@
     "path"
   ],
   "devDependencies": {
-    "mocha": "*"
+    "ava": "^0.25.0"
+  },
+  "dependencies": {
+    "eslint": "^4.18.1",
+    "meow": "^4.0.0",
+    "node-fetch": "^2.0.0"
   }
 }

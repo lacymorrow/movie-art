@@ -1,2 +1,4 @@
 .fuse*
 .DS*
+
+package-lock.json

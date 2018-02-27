@@ -1,104 +1,183 @@
 'use strict';
-module.exports = function (movie, year, size, type, cb) {
-	// We use the var `movie` instead of something generic like `query` because tv support was added later
-	var search = {
-		key: '9d2bff12ed955c7f1f74b83187f188ae',
-		protocol: require('https'),
-		cb: cb,
-		id: null,
-		year: null,
-		size: null,
-		sizes: null,
-		movie: movie,
-		options: {
-			host: 'api.themoviedb.org',
-			port: 443,
-			path: null
-		}
-	}
-	
-	if (typeof year === 'function') {
-		search.cb = year;
-		year = size = null;
-	} else if (typeof size === 'function') {
-		search.cb = size;
-		size = null;
-	} else if (typeof type === 'function') {
-		search.cb = type;
-		type = null;
-	}
+( function ( root, cx ) {
 
-    if(type === null || (type != 'tv' && type != 'movie'))
-    {
-        type = 'movie';
-    }
-    search.type = type;
+	if ( typeof define === 'function' && define.amd ) {
 
-	if (movie === null){
-		getConfig(search);
-	} else if (typeof movie === 'function') {
-		search.cb = movie;
-		search.movie = null;
-		getConfig(search);
-	} else if (typeof movie !== 'string') {
-		throw new Error('Expected a string');
+		// AMD
+		define( ['fetch'], cx )
+
+	} else if ( typeof exports === 'object' ) {
+
+		// Node, CommonJS-like
+		module.exports = cx( require( 'node-fetch' ) )
+
 	} else {
-		search.size = size;
-		search.year = year;
-		getConfig(search);
+
+		// Browser globals (root is window)
+		root.movieInfo = cx( root.fetch )
+
 	}
-};
 
-function getConfig (search) {
-	var data = '';
-	search.options.path = encodeURI('/3/configuration?api_key=' + search.key);
-	search.protocol.get(search.options, function(resp){
-	  resp.on('data', function(chunk){
-		data += chunk;
-	  });
-	  resp.on('end', function(){
-		var json = JSON.parse(data);
-		if (typeof(json.status_message) !== 'undefined'){
-			search.cb('Got error: ' + json.status_message);
-		} else {
-			search.baseURL = json.images.base_url;
-			search.sizes = json.images.poster_sizes;
-			if(search.movie === null){
-				search.cb('Available sizes: ' + search.sizes);
-			}
-			getMovie(search);
-		}
-	  });
-	}).on("error", function(e){
-		search.cb('Got error: ' + e.message);
-	});
-}
+} )( this, function ( fetch ) {
 
-function getMovie(search) {
-	var data = '';
-	search.options.path = encodeURI('/3/search/'+search.type+'?api_key=' + search.key + '&query=' + search.movie + ((search.year !== null) ? '&year='+search.year : ''));
-	search.protocol.get(search.options, function(resp){
-	  resp.on('data', function(chunk){
-		data += chunk;
-	  });
-	  resp.on('end', function(){
-		var json = JSON.parse(data);
-		if (typeof(json.status_message) !== 'undefined'){
-			search.cb('Got error: ' + json.status_message);
-		} else if (json.results.length === 0){
-			search.cb('Got error: ' + 'No results found')
-		} else if (search.sizes.indexOf(search.size) !== -1) {
-			search.cb(null, encodeURI(search.baseURL + search.size + json.results[0].poster_path));
-		} else {
-			search.cb(null, encodeURI(search.baseURL + search.sizes[search.sizes.length-1] + json.results[0].poster_path));
+	// TMDB key (public on purpose)
+	const key = '9d2bff12ed955c7f1f74b83187f188ae'
+	const base = 'https://api.themoviedb.org'
+
+	function getConfiguration () {
+
+		const url =
+			base +
+			encodeURI( '/3/configuration?api_key=' + key )
+
+		// Request
+		return fetch( url, {
+			method: 'GET'
+		} )
+			.then(
+				function ( response ) {
+
+					return response.json()
+
+				},
+				function ( error ) {
+
+					return Promise.reject( error.message ) //= > String
+
+				}
+			)
+			.then( function ( json ) {
+
+				if ( json && typeof json.status_message !== 'undefined' ) {
+
+					return Promise.reject( new Error( 'JSON Error: ' + json.status_message ) )
+
+				}
+
+				const baseURL = json.images.base_url
+				const sizes = json.images.poster_sizes
+				return { baseURL, sizes }
+
+			} )
+
+	}
+
+	async function movieArt ( query, options, cb ) {
+
+		// Massage inputs
+		if ( typeof query !== 'string' ) {
+
+			throw new Error( 'Expected search to be a string' )
+
+		} else if ( typeof options === 'function' ) {
+
+			cb = options
+			options = null
+
 		}
-	  });
-	}).on("error", function(e){
-		if(search.year !== null){
-			search.year = null;
-			getMovie(search);
-		} else {
-			search.cb('Got error: ' + e.message);
+
+		if ( typeof cb !== 'function' ) cb = null
+
+		// Default options
+		const opts = Object.assign( {
+			year: null,
+			size: null,
+			type: 'movie',
+			landscape: false
+		}, options )
+
+		if ( opts.type === null || ( opts.type !== 'tv' && opts.type !== 'movie' ) ) {
+
+			opts.type = 'movie'
+
 		}
-	});
-}
+
+		// Get configuration vars
+		const { baseURL, sizes } = await getConfiguration()
+
+		// Assemble URL
+		const url =
+			base +
+			encodeURI(
+				'/3/search/' +
+					opts.type +
+					'?api_key=' +
+					key +
+					'&query=' +
+					query +
+					( opts.year !== null ? '&year=' + opts.year : '' )
+			)
+
+		// Request
+		const response = fetch( url, {
+			method: 'GET'
+		} )
+			.then(
+				function ( response ) {
+
+					return response.json()
+
+				},
+				function ( error ) {
+
+					return Promise.reject( error.message ) //= > String
+
+				}
+			)
+			.then( function ( json ) {
+
+				if ( json && typeof json.status_message !== 'undefined' ) {
+
+					return Promise.reject( new Error( 'JSON Error: ' + json.status_message ) )
+
+				}
+				if ( json && json.results && json.results.length === 0 ) {
+
+					// Retry failed search without year
+					if ( opts.year !== null ) {
+
+						opts.year = null
+						return movieArt( query, opts, cb )
+
+					} else {
+
+						return Promise.reject( new Error( 'Search Error: No results found' ) )
+
+					}
+
+				} else {
+
+					// Success
+					const image = opts.landscape ? json.results[0].backdrop_path : json.results[0].poster_path
+					if ( sizes.indexOf( opts.size ) !== -1 ) {
+
+						return encodeURI( baseURL + opts.size + image )
+
+					} else {
+
+						return encodeURI( baseURL + sizes[sizes.length - 1] + image )
+
+					}
+
+				}
+
+			} )
+			.catch( error => error )
+
+		// Callback
+		if ( cb ) {
+
+			return response.then( res => cb( null, res ), err => cb( err, null ) )
+
+		}
+
+		// Promise
+		return response
+
+	}
+
+	// exposed public method
+	return movieArt
+
+} )
+

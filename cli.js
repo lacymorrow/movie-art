@@ -1,57 +1,55 @@
 #!/usr/bin/env node
-'use strict';
-var pkg = require('./package.json');
-var movieArt = require('./index');
-var movie = process.argv[2];
+'use strict'
+const meow = require( 'meow' )
+const movieArt = require( './index' )
 
-var cb = function (err, url) {
-	if (err) {
-		console.error(err);
-		process.exit(1);
+const cli = meow( `
+	Usage
+	  $ movie-art movie [year] [size] [type] [landscape]
+
+	Options
+		--year,      -y  Release date year
+		--size,      -s  Possible values: [w92, w154, w185, w342, w500, w780, original]
+		--type,      -t  Possible values: [tv, movie] 
+		--landscape, -l  Return wider backdrop image if true
+
+	Example
+	  $ movie-art 'Oceans Eleven' --year 1960
+	  // => ...
+`, {
+	flags: {
+		landscape: {
+			type: 'boolean',
+			alias: 'l'
+		},
+		size: {
+			type: 'string',
+			alias: 's'
+		},
+		type: {
+			type: 'string',
+			alias: 't'
+		},
+		year: {
+			type: 'string',
+			alias: 'y'
+		}
 	}
-	console.log(url);
+} )
+
+let opts = {
+	size: null,
+	type: null,
+	year: null,
+	landscape: false
 }
 
-function help() {
-	console.log(pkg.description);
-	console.log('');
-	console.log('Usage');
-	console.log('  $ movie-art movie [year] [size] [type]');
-	console.log('');
-	console.log('Example');
-	console.log('  $ movie-art \'Oceans Eleven\' 1960');
-	console.log('  http://path/to/oceans_eleven_poster_1960.jpg');
-	movieArt(null, null, null, cb);
-}
+if ( cli.flags.s ) opts.size = cli.flags.s
+if ( cli.flags.t ) opts.type = cli.flags.t
+if ( cli.flags.y ) opts.year = cli.flags.y
+if ( cli.flags.l ) opts.landscape = cli.flags.l
+if ( cli.input[1] ) opts.year = cli.flags.y
+if ( !cli.input[0] ) cli.showHelp()
 
-if (process.argv.indexOf('-h') !== -1 || process.argv.indexOf('--help') !== -1) {
-	help();
-	return;
-}
-
-if (process.argv.indexOf('-v') !== -1 || process.argv.indexOf('--version') !== -1) {
-	console.log(pkg.version);
-	return;
-}
-
-// Oh valiant if chain, I wish you weren't so useful
-var argc = process.argv.length;
-if (argc < 3){
-	help();
-} else if (argc === 3){
-	movieArt(movie, null, null, 'movie', cb);
-} else if (argc === 4 && (!isNaN(parseFloat(process.argv[3])) && isFinite(process.argv[3]))){
-	movieArt(movie, process.argv[3], null, 'movie', cb);
-} else if (argc === 4 && ['movie', 'tv'].indexOf(process.argv[3])){
-	movieArt(movie, null, null, process.argv[3], cb);
-} else if (argc === 4){
-	movieArt(movie, null, process.argv[3], 'movie', cb);
-} else if (argc === 5 && !isNaN(parseFloat(process.argv[3])) && isFinite(process.argv[3]) && ['movie', 'tv'].indexOf(process.argv[4])){
-	movieArt(movie, process.argv[3], null, process.argv[4], cb);
-} else if (argc === 5 && !isNaN(parseFloat(process.argv[3])) && isFinite(process.argv[3])){
-	movieArt(movie, process.argv[3], process.argv[4], 'movie', cb);
-} else if (argc === 5){
-	movieArt(movie, null, process.argv[3], process.argv[4], cb);
-} else {
-	movieArt(movie, process.argv[3], process.argv[4], process.argv[5], cb);
-}
+movieArt( cli.input[0], opts )
+	.then( console.log )

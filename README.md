@@ -15,25 +15,28 @@ $ npm install --save movie-art
 ## Usage
 
 ```js
-
 var movieArt = require('movie-art');
 
+// Basic usage
 movieArt('Oceans Eleven', function (err, url) {
     console.log(url);
     //=> http://path/to/oceans_eleven_poster.jpg
 });
 
-movieArt('Oceans Eleven', '1960', function (err, url) {
+// Usage with landscape orientation backdrop
+movieArt('Oceans Eleven', {landscape: true}, function (err, url) {
     console.log(url);
-    //=> http://path/to/oceans_eleven_poster_1960.jpg
+    //=> http://path/to/oceans_eleven_backdrop.jpg
 });
 
-movieArt('Oceans Eleven', '1960', 'w92', function (err, url) {
+// Usage with size and year options
+movieArt('Oceans Eleven', {year: '1960', size: 'w92'}, function (err, url) {
     console.log(url);
     //=> http://path/to/oceans_eleven_poster_1960_small.jpg
 });
 
-movieArt('Star Trek: The Original Series', null, null,'tv', function (err, url) {
+// Query television art
+movieArt('Star Trek: The Original Series', {type: 'tv'}, function (err, url) {
     console.log(url);
     //=> http://path/to/star_trek_the_original_series_poster.jpg
 });
@@ -42,7 +45,7 @@ movieArt('Star Trek: The Original Series', null, null,'tv', function (err, url) 
 
 ## API
 
-### movieArt(movie [, year ] [, size ] [, type ], callback)
+### movieArt(movie [, options] [, callback])
 
 #### movie
 
@@ -52,13 +55,18 @@ Type: `string`
 Movie to search for.
 
 
+#### callback(err, url)
+
+
+### Options
+
+A JavaScript object with the following properties
+
 #### year
 
 Type: `string` 
 
 Optional movie year.
-
-#### callback(err, url)
 
 
 #### size
@@ -70,6 +78,7 @@ Call `movieArt(function(e){console.log(e);});` or run the CLI command with no ar
 
 *possible values at time of writing:* `w92`, `w154`, `w185`, `w342`, `w500`, `w780`, `original`
 
+
 #### type
 
 Type: `string`
@@ -77,7 +86,11 @@ Type: `string`
 The type of request: either `tv` or `movie`. Defaults to `movie`.
 
 
-#### callback(err, url)
+#### landscape
+
+Type: `boolean`
+
+Returns a wider, landscape orientation backdrop if true
 
 
 ## CLI
@@ -94,11 +107,17 @@ $ npm install --global movie-art
 $ movie-art --help
 
 Usage
-  $ movie-art movie [year] [size]
+  $ movie-art movie [year] [size] [type] [landscape]
+
+Options
+  --year,      -y  Release date year
+  --size,      -s  Possible values: [w92, w154, w185, w342, w500, w780, original]
+  --type,      -t  Possible values: [tv, movie] 
+  --landscape, -l  Return wider backdrop image if true
 
 Example
-  $ movie-art 'Oceans Eleven' 1960 w92
-  http://path/to/oceans_eleven_poster_1960_small.jpg
+  $ movie-art 'Oceans Eleven' --year 1960  --size w92
+  //=> http://path/to/oceans_eleven_poster_1960_small.jpg
 ```
 
 

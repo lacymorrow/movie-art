@@ -1,6 +1,6 @@
 # movie-art [![npm version](https://badge.fury.io/js/movie-art.svg)](https://badge.fury.io/js/movie-art) [![Build Status](https://travis-ci.org/lacymorrow/movie-art.svg?branch=master)](https://travis-ci.org/lacymorrow/movie-art)
 
-> Get a movie (or TV-series) poster image url in node: "Oceans Eleven" ➔ http://path/to/oceans_eleven_poster.jpg
+> Get a movie (or TV-series) poster and backdrop image url: "Oceans Eleven" ➔ http://path/to/oceans_eleven_poster.jpg
 
 [![movie-art](demo.svg)]()
 
@@ -15,37 +15,47 @@ $ npm install --save movie-art
 ## Usage
 
 ```js
-var movieArt = require('movie-art');
+var movieArt = require('movie-art')
+```
 
-// Basic usage
+##### Basic usage
+```js
 movieArt('Oceans Eleven', function (err, url) {
-    console.log(url);
+    console.log(url)
     //=> http://path/to/oceans_eleven_poster.jpg
-});
+})
+```
 
-// Usage with landscape orientation backdrop
+##### Usage with landscape orientation backdrop
+```js
 movieArt('Oceans Eleven', {landscape: true}, function (err, url) {
-    console.log(url);
+    console.log(url)
     //=> http://path/to/oceans_eleven_backdrop.jpg
-});
+})
+```
 
-// Usage with size and year options
+##### Usage with size and year options
+```js
 movieArt('Oceans Eleven', {year: '1960', size: 'w92'}, function (err, url) {
-    console.log(url);
+    console.log(url)
     //=> http://path/to/oceans_eleven_poster_1960_small.jpg
-});
+})
+```
 
-// Query television art
+##### Query television art
+```js
 movieArt('Star Trek: The Original Series', {type: 'tv'}, function (err, url) {
-    console.log(url);
+    console.log(url)
     //=> http://path/to/star_trek_the_original_series_poster.jpg
-});
+})
 
 ```
 
 ## API
 
 ### movieArt(movie [, options] [, callback])
+
+Returns a Promise which resolves to a string URL
 
 #### movie
 
@@ -54,13 +64,14 @@ Type: `string`
 
 Movie to search for.
 
+#### callback(error, response)
 
-#### callback(err, url)
+Function to be called when complete or on error
 
 
 ### Options
 
-A JavaScript object with the following properties
+A JavaScript object with the following properties:
 
 #### year
 
@@ -103,7 +114,7 @@ $ npm install --global movie-art
 
 #### Usage
 
-```bash
+```
 $ movie-art --help
 
 Usage

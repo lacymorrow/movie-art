@@ -20,13 +20,13 @@ test( 'returns a url with year ', async t => {
 
 } )
 
-test( 'landscape returns a different url ', async t => {
+test( 'backdrop returns a different url ', async t => {
 
 	t.plan( 1 )
 
 	const response1 = await movieArt( 'crash' )
-	const response2 = await movieArt( 'crash', { landscape: true } )
-	t.not( response1, response2, 'portrait and landscape are different URLs' )
+	const response2 = await movieArt( 'crash', { output: 'backdrop' } )
+	t.not( response1, response2, 'poster and backdrop are different URLs' )
 
 } )
 
@@ -45,6 +45,15 @@ test( 'returns tv results ', async t => {
 
 	const response = await movieArt( 'seinfeld', { type: 'tv' } )
 	t.is( response.indexOf( 'http' ), 0, 'response is a URL' )
+
+} )
+
+test( 'fetch backdrop and poster', async t => {
+
+	t.plan( 1 )
+
+	const response = await movieArt( 'crash', { output: 'all' } )
+	t.is( typeof response, 'object', 'response is an object' )
 
 } )
 

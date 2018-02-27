@@ -83,12 +83,18 @@
 			year: null,
 			size: null,
 			type: 'movie',
-			landscape: false
+			output: 'poster'
 		}, options )
 
 		if ( opts.type === null || ( opts.type !== 'tv' && opts.type !== 'movie' ) ) {
 
 			opts.type = 'movie'
+
+		}
+
+		if ( opts.output !== 'all' && opts.output !== 'backdrop' ) ) {
+
+			opts.output = 'poster'
 
 		}
 
@@ -148,15 +154,15 @@
 				} else {
 
 					// Success
-					const image = opts.landscape ? json.results[0].backdrop_path : json.results[0].poster_path
-					if ( sizes.indexOf( opts.size ) !== -1 ) {
-
-						return encodeURI( baseURL + opts.size + image )
-
+					const size = sizes.indexOf( opts.size ) !== -1 ? opts.size : sizes[sizes.length - 1]
+					if( opts.output === 'all' ) {
+						return {
+							backdrop: encodeURI( baseURL + size + json.results[0].backdrop_path ),
+							poster: encodeURI( baseURL + size + json.results[0].poster_path )
+						}
 					} else {
-
-						return encodeURI( baseURL + sizes[sizes.length - 1] + image )
-
+						const image = opts.output === 'backdrop' ? json.results[0].backdrop_path : json.results[0].poster_path
+						return encodeURI( baseURL + size + image)
 					}
 
 				}

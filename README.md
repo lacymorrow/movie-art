@@ -1,4 +1,4 @@
-# movie-art [![npm version](https://badge.fury.io/js/movie-art.svg)](https://badge.fury.io/js/movie-art) [![Build Status](https://travis-ci.org/lacymorrow/movie-art.svg?branch=master)](https://travis-ci.org/lacymorrow/movie-art)
+# movie-art [![npm version](https://badge.fury.io/js/movie-art.svg)](https://badge.fury.io/js/movie-art) [![Build Status](https://travis-ci.org/lacymorrow/movie-art.svg?branch=master)](https://travis-ci.org/lacymorrow/movie-art) [![Try movie-art on RunKit](https://badge.runkitcdn.com/movie-art.svg)](https://npm.runkit.com/movie-art)
 
 > Get a movie (or TV-series) poster and backdrop image url: "Oceans Eleven" ➔ http://path/to/oceans_eleven_poster.jpg
 
@@ -7,57 +7,76 @@
 
 ## Install
 
-```bash
-$ npm install --save movie-art
+Use with your favorite module loader or package manager. In the browser:
+
+```html
+<!-- movieInfo window global -->
+<script type="text/javascript" src="https://unpkg.com/movie-art" />
 ```
+
+Using [NPM](https://npmjs.com):
+
+```bash
+$ npm install -g movie-art
+```
+
+
+## Features
+ * Use anywhere, browser or Node - UMD _([Browser Support](https://caniuse.com/#feat=fetch))_
+ * Promise and Callback API
+ * Fetch images for movies or television
+ * Poster or backdrop photos
 
 
 ## Usage
 
 ```js
 var movieArt = require('movie-art')
+
+movieArt('Oceans Eleven').then(console.log)
 ```
 
-##### Basic usage
+##### Callback
 ```js
-movieArt('Oceans Eleven', function (err, url) {
-    console.log(url)
-    //=> http://path/to/oceans_eleven_poster.jpg
+movieArt('Oceans Eleven', (err, res) => {
+    console.log(res)
+    //=> http://path/to/oceans_eleven.jpg
 })
 ```
 
-##### Usage with landscape orientation backdrop
+##### Usage with backdrop and poster
 ```js
-movieArt('Oceans Eleven', {landscape: true}, function (err, url) {
-    console.log(url)
-    //=> http://path/to/oceans_eleven_backdrop.jpg
-})
+movieArt('Oceans Eleven', {output: 'all'})
+  .then( res => console.log(res.backdrop) )
+
+//=> http://path/to/oceans_eleven_backdrop.jpg
 ```
 
 ##### Usage with size and year options
 ```js
-movieArt('Oceans Eleven', {year: '1960', size: 'w92'}, function (err, url) {
-    console.log(url)
-    //=> http://path/to/oceans_eleven_poster_1960_small.jpg
-})
+movieArt('Oceans Eleven', {year: '1960', size: 'w92'})
+  .then( res => console.log(res.backdrop) )
+
+//=> http://path/to/oceans_eleven_poster_1960_small.jpg
 ```
 
 ##### Query television art
 ```js
-movieArt('Star Trek: The Original Series', {type: 'tv'}, function (err, url) {
-    console.log(url)
-    //=> http://path/to/star_trek_the_original_series_poster.jpg
-})
+movieArt('Star Trek: The Original Series', {type: 'tv'})
+  .then( res => console.log(res.backdrop) )
 
+//=> http://path/to/star_trek_the_original_series_poster.jpg
 ```
+
 
 ## API
 
-### movieArt(movie [, options] [, callback])
+### movieArt(search [, options] [, callback])
 
-Returns a Promise which resolves to a string URL
+Accepts a movie or television show title (string) as input.
+Returns a Promise which resolves to a string URL.
 
-#### movie
+#### search
 
 *Required*  
 Type: `string`
@@ -66,7 +85,7 @@ Movie to search for.
 
 #### callback(error, response)
 
-Function to be called when complete or on error
+Function to be called when complete or on error.
 
 
 ### Options
@@ -85,9 +104,7 @@ Optional movie year.
 Type: `string` 
 
 Requested poster size. 
-Call `movieArt(function(e){console.log(e);});` or run the CLI command with no arguments to retrieve the list of available sizes.
-
-*possible values at time of writing:* `w92`, `w154`, `w185`, `w342`, `w500`, `w780`, `original`
+*possible values:* `w92`, `w154`, `w185`, `w342`, `w500`, `w780`, `original`
 
 
 #### type
@@ -95,36 +112,32 @@ Call `movieArt(function(e){console.log(e);});` or run the CLI command with no ar
 Type: `string`
 
 The type of request: either `tv` or `movie`. Defaults to `movie`.
+*possible values:* `tv`, `movie`
 
 
-#### landscape
+#### output
 
 Type: `boolean`
 
-Returns a wider, landscape orientation backdrop if true
+`backdrop` returns a wider, backdrop output backdrop.
+`all` returns an object like `{poster:..., backdrop: ...}`
+Default: `poster` 
+*possible values:* `poster`, `backdrop`, `all`
 
 
-## CLI
-
-You can also use it as a CLI app by installing it globally:
-
-```bash
-$ npm install --global movie-art
-```
-
-#### Usage
+#### CLI Usage
 
 ```
 $ movie-art --help
 
 Usage
-  $ movie-art movie [year] [size] [type] [landscape]
+  $ movie-art movie [year] [size] [type] [output]
 
 Options
-  --year,      -y  Release date year
-  --size,      -s  Possible values: [w92, w154, w185, w342, w500, w780, original]
-  --type,      -t  Possible values: [tv, movie] 
-  --landscape, -l  Return wider backdrop image if true
+  --year,        -y  Release date year
+  --size,        -s  Possible values: [w92, w154, w185, w342, w500, w780, original]
+  --type,        -t  Possible values: [tv, movie] 
+  --output, -o  Possible values: [poster, backdrop, all]
 
 Example
   $ movie-art 'Oceans Eleven' --year 1960  --size w92

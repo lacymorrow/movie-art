@@ -97,7 +97,7 @@
 			opts.output = 'poster'
 
 		}
-
+		console.log(opts.output)
 		// Get configuration vars
 		const { baseURL, sizes } = await getConfiguration()
 

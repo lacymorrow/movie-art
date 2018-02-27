@@ -5,7 +5,7 @@ const movieArt = require( './index' )
 
 const cli = meow( `
 	Usage
-	  $ movie-art movie [year] [size] [type] [output]
+	  $ movie-art search [year] [size] [type] [output]
 
 	Options
 		--year,   -y  Release date year

@@ -2,7 +2,7 @@
 
 > Get a movie (or TV-series) poster and backdrop image url: "Oceans Eleven" ➔ http://path/to/oceans_eleven_poster.jpg
 
-[![movie-art](demo.svg)]()https://movie-art-mcc0lohingex.runkit.sh/?search=Avatar
+[![movie-art](demo.svg)]()
 
 #### [Try it on RunKit](https://runkit.com/lacymorrow/movie-art) _([Output](https://runkit.io/lacymorrow/movie-art/branches/master?search=Avatar))_
 

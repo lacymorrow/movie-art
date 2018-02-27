@@ -92,7 +92,7 @@
 
 		}
 
-		if ( opts.output !== 'all' && opts.output !== 'backdrop' ) ) {
+		if ( opts.output !== 'all' && opts.output !== 'backdrop' ) {
 
 			opts.output = 'poster'
 
@@ -155,14 +155,18 @@
 
 					// Success
 					const size = sizes.indexOf( opts.size ) !== -1 ? opts.size : sizes[sizes.length - 1]
-					if( opts.output === 'all' ) {
+					if ( opts.output === 'all' ) {
+
 						return {
 							backdrop: encodeURI( baseURL + size + json.results[0].backdrop_path ),
 							poster: encodeURI( baseURL + size + json.results[0].poster_path )
 						}
+
 					} else {
+
 						const image = opts.output === 'backdrop' ? json.results[0].backdrop_path : json.results[0].poster_path
-						return encodeURI( baseURL + size + image)
+						return encodeURI( baseURL + size + image )
+
 					}
 
 				}

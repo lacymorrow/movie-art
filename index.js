@@ -14,7 +14,7 @@
 	} else {
 
 		// Browser globals (root is window)
-		root.movieInfo = cx( root.fetch )
+		root.movieArt = cx( root.fetch )
 
 	}
 

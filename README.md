@@ -7,15 +7,14 @@
 #### [Try it on RunKit](https://runkit.com/lacymorrow/movie-art) _([Output](https://runkit.io/lacymorrow/movie-art/branches/master?search=Avatar))_
 
 
+## Features
+ * Use anywhere, browser or Node - UMD _([Browser Support](https://caniuse.com/#feat=fetch))_
+ * Promise and Callback API
+ * Fetch images for movies or television
+ * Poster or backdrop photos
+
+
 ## Install
-
-Use with your favorite module loader or package manager. In the browser:
-
-```html
-<!-- movieInfo window global -->
-<script type="text/javascript" src="https://unpkg.com/movie-art"></script>
-```
-(via Unpkg, or via [JSDelivr](https://cdn.jsdelivr.net/npm/movie-art/index.min.js"))
 
 Using [NPM](https://npmjs.com):
 
@@ -23,12 +22,13 @@ Using [NPM](https://npmjs.com):
 $ npm install -g movie-art
 ```
 
+In the browser:
 
-## Features
- * Use anywhere, browser or Node - UMD _([Browser Support](https://caniuse.com/#feat=fetch))_
- * Promise and Callback API
- * Fetch images for movies or television
- * Poster or backdrop photos
+```html
+<!-- movieInfo window global -->
+<script type="text/javascript" src="https://unpkg.com/movie-art"></script>
+```
+(via Unpkg, or via [JSDelivr](https://cdn.jsdelivr.net/npm/movie-art/index.min.js"))
 
 
 ## Usage
@@ -41,8 +41,8 @@ movieArt('Oceans Eleven').then(console.log)
 
 ##### Callback
 ```js
-movieArt('Oceans Eleven', (err, res) => {
-    console.log(res)
+movieArt('Oceans Eleven', (error, response) => {
+    console.log(response)
     //=> http://path/to/oceans_eleven.jpg
 })
 ```
@@ -50,7 +50,7 @@ movieArt('Oceans Eleven', (err, res) => {
 ##### Usage with size and year options
 ```js
 movieArt('Oceans Eleven', {year: '1960', size: 'w92'})
-  .then( res => console.log(res) )
+  .then( response => console.log(response) )
 
 //=> http://path/to/oceans_eleven_poster_1960_small.jpg
 ```
@@ -58,7 +58,7 @@ movieArt('Oceans Eleven', {year: '1960', size: 'w92'})
 ##### Usage with backdrop and poster
 ```js
 movieArt('Oceans Eleven', {output: 'all'})
-  .then( res => console.log(res.backdrop) )
+  .then( response => console.log(response.backdrop) )
 
 //=> http://path/to/oceans_eleven_backdrop.jpg
 ```
@@ -66,7 +66,7 @@ movieArt('Oceans Eleven', {output: 'all'})
 ##### Query television art
 ```js
 movieArt('Star Trek: The Original Series', {type: 'tv', output: 'all'})
-  .then( res => console.log(res.poster) )
+  .then( response => console.log(response.poster) )
 
 //=> http://path/to/star_trek_the_original_series_poster.jpg
 ```

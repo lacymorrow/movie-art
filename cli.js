@@ -48,7 +48,7 @@ if ( cli.flags.s ) opts.size = cli.flags.s
 if ( cli.flags.t ) opts.type = cli.flags.t
 if ( cli.flags.y ) opts.year = cli.flags.y
 if ( cli.flags.o ) opts.output = cli.flags.o
-if ( cli.input[1] ) opts.year = cli.flags.y
+if ( cli.input[1] ) opts.year = cli.flags.input[1]
 if ( !cli.input[0] ) cli.showHelp()
 
 movieArt( cli.input[0], opts )

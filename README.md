@@ -13,8 +13,9 @@ Use with your favorite module loader or package manager. In the browser:
 
 ```html
 <!-- movieInfo window global -->
-<script type="text/javascript" src="https://unpkg.com/movie-art" />
+<script type="text/javascript" src="https://unpkg.com/movie-art"></script>
 ```
+(via Unpkg, or via [JSDelivr](https://cdn.jsdelivr.net/npm/movie-art/index.min.js"))
 
 Using [NPM](https://npmjs.com):
 
@@ -33,7 +34,7 @@ $ npm install -g movie-art
 ## Usage
 
 ```js
-var movieArt = require('movie-art')
+const movieArt = require('movie-art')
 
 movieArt('Oceans Eleven').then(console.log)
 ```
@@ -46,6 +47,14 @@ movieArt('Oceans Eleven', (err, res) => {
 })
 ```
 
+##### Usage with size and year options
+```js
+movieArt('Oceans Eleven', {year: '1960', size: 'w92'})
+  .then( res => console.log(res) )
+
+//=> http://path/to/oceans_eleven_poster_1960_small.jpg
+```
+
 ##### Usage with backdrop and poster
 ```js
 movieArt('Oceans Eleven', {output: 'all'})
@@ -54,18 +63,10 @@ movieArt('Oceans Eleven', {output: 'all'})
 //=> http://path/to/oceans_eleven_backdrop.jpg
 ```
 
-##### Usage with size and year options
-```js
-movieArt('Oceans Eleven', {year: '1960', size: 'w92'})
-  .then( res => console.log(res.backdrop) )
-
-//=> http://path/to/oceans_eleven_poster_1960_small.jpg
-```
-
 ##### Query television art
 ```js
-movieArt('Star Trek: The Original Series', {type: 'tv'})
-  .then( res => console.log(res.backdrop) )
+movieArt('Star Trek: The Original Series', {type: 'tv', output: 'all'})
+  .then( res => console.log(res.poster) )
 
 //=> http://path/to/star_trek_the_original_series_poster.jpg
 ```

@@ -2,7 +2,7 @@
 import test from 'ava'
 import movieArt from './index'
 
-test( 'returns a url ', async t => {
+test( 'returns a url', async t => {
 
 	t.plan( 1 )
 
@@ -11,7 +11,7 @@ test( 'returns a url ', async t => {
 
 } )
 
-test( 'returns a url with year ', async t => {
+test( 'returns a url with year', async t => {
 
 	t.plan( 1 )
 
@@ -20,7 +20,7 @@ test( 'returns a url with year ', async t => {
 
 } )
 
-test( 'backdrop returns a different url ', async t => {
+test( 'backdrop returns a different url', async t => {
 
 	t.plan( 1 )
 
@@ -30,7 +30,7 @@ test( 'backdrop returns a different url ', async t => {
 
 } )
 
-test( 'returns a specific size ', async t => {
+test( 'returns a specific size', async t => {
 
 	t.plan( 1 )
 
@@ -39,7 +39,7 @@ test( 'returns a specific size ', async t => {
 
 } )
 
-test( 'returns tv results ', async t => {
+test( 'returns tv results', async t => {
 
 	t.plan( 1 )
 
@@ -57,7 +57,7 @@ test( 'fetch backdrop and poster', async t => {
 
 } )
 
-test.cb( 'callback returns a url ', t => {
+test.cb( 'callback returns a url', t => {
 
 	t.plan( 1 )
 

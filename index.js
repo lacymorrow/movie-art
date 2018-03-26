@@ -1,5 +1,5 @@
 'use strict';
-( function ( root, cx ) {
+( ( root, cx ) => {
 
 	if ( typeof define === 'function' && define.amd ) {
 
@@ -18,13 +18,13 @@
 
 	}
 
-} )( this, function ( fetch ) {
+} )( this, ( fetch ) => {
 
 	// TMDB key (public on purpose)
 	const key = '9d2bff12ed955c7f1f74b83187f188ae'
 	const base = 'https://api.themoviedb.org'
 
-	function getConfiguration () {
+	const getConfiguration = () => {
 
 		const url =
 			base +
@@ -35,22 +35,14 @@
 			method: 'GET'
 		} )
 			.then(
-				function ( response ) {
-
-					return response.json()
-
-				},
-				function ( error ) {
-
-					return Promise.reject( error.message ) //= > String
-
-				}
+				res => res.json(),
+				err => Promise.reject( err.message )
 			)
-			.then( function ( json ) {
+			.then( json => {
 
 				if ( json && typeof json.status_message !== 'undefined' ) {
 
-					return Promise.reject( new Error( 'JSON Error: ' + json.status_message ) )
+					return Promise.reject( new Error( 'JSON - ' + json.status_message ) )
 
 				}
 
@@ -62,7 +54,7 @@
 
 	}
 
-	async function movieArt ( query, options, cb ) {
+	const movieArt = async ( query, options, cb ) => {
 
 		// Massage inputs
 		if ( typeof query !== 'string' ) {
@@ -119,22 +111,14 @@
 			method: 'GET'
 		} )
 			.then(
-				function ( response ) {
-
-					return response.json()
-
-				},
-				function ( error ) {
-
-					return Promise.reject( error.message ) //= > String
-
-				}
+				res => res.json(),
+				err => Promise.reject( err.message )
 			)
-			.then( function ( json ) {
+			.then( json => {
 
 				if ( json && typeof json.status_message !== 'undefined' ) {
 
-					return Promise.reject( new Error( 'JSON Error: ' + json.status_message ) )
+					return Promise.reject( new Error( 'JSON - ' + json.status_message ) )
 
 				}
 				if ( json && json.results && json.results.length === 0 ) {
@@ -147,7 +131,7 @@
 
 					} else {
 
-						return Promise.reject( new Error( 'Search Error: No results found' ) )
+						return Promise.reject( new Error( 'No results found' ) )
 
 					}
 

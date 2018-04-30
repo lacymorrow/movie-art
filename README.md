@@ -2,7 +2,7 @@
 
 > Get a movie (or TV-series) poster and backdrop image url: "Crash" ➔ [http://path/to/crash.jpg](http://image.tmdb.org/t/p/original/pG8LL4LYMCr5uikhx9rewrW8352.jpg)
 
-[![movie-art](demo.svg)]()
+[![movie-art](https://github.com/lacymorrow/movie-art/raw/master/demo.svg?sanitize=true)]()
 
 #### [Try it on RunKit](https://runkit.com/lacymorrow/movie-art) _([Output](https://runkit.io/lacymorrow/movie-art/branches/master?search=Avatar))_
 
@@ -25,10 +25,10 @@ $ npm install -g movie-art
 In the browser:
 
 ```html
-<!-- movieInfo window global -->
+<!-- movieArt window global -->
 <script type="text/javascript" src="https://unpkg.com/movie-art"></script>
 ```
-(via Unpkg, or via [JSDelivr](https://cdn.jsdelivr.net/npm/movie-art/index.min.js"))
+(via Unpkg, or via [JSDelivr](https://cdn.jsdelivr.net/npm/movie-art/index.min.js))
 
 
 ## Usage
@@ -55,12 +55,15 @@ movieArt('Oceans Eleven', {year: '1960', size: 'w92'})
 //=> http://path/to/oceans_eleven_poster_1960_small.jpg
 ```
 
-##### Usage with backdrop and poster
+##### Usage with backdrop and poster (landscape and portrait)
 ```js
 movieArt('Oceans Eleven', {output: 'all'})
-  .then( response => console.log(response.backdrop) )
+  .then( console.log )
 
-//=> http://path/to/oceans_eleven_backdrop.jpg
+//=> {
+  poster: http://path/to/oceans_eleven_poster.jpg,
+  backdrop: http://path/to/oceans_eleven_backdrop.jpg,
+}
 ```
 
 ##### Query television art

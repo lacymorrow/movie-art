@@ -1,6 +1,6 @@
 {
   "name": "movie-art",
-  "version": "2.0.3",
+  "version": "3.0.0",
   "description": "Fetch art for a movie or tv show: 'Oceans Eleven' ➔ http://path/to/oceans_eleven_poster.jpg",
   "license": "MIT",
   "repository": "lacymorrow/movie-art",

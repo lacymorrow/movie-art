@@ -9,6 +9,7 @@
 
 ## Features
  * Use anywhere, browser or Node - UMD _([Browser Support](https://caniuse.com/#feat=fetch))_
+ * Works in React + NextJS client/server (uses [isomorphic-fetch](https://www.npmjs.com/package/isomorphic-fetch))
  * Promise and Callback API
  * Fetch images for movies or television
  * Poster or backdrop photos
@@ -19,7 +20,7 @@
 Using [NPM](https://npmjs.com):
 
 ```bash
-$ npm install -g movie-art
+$ npm install movie-art
 ```
 
 In the browser:
@@ -134,6 +135,8 @@ Default: `poster`
 #### CLI Usage
 
 ```
+$ npm install -g movie-art
+
 $ movie-art --help
 
 Usage

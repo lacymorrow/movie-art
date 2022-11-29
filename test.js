@@ -1,6 +1,6 @@
 'use strict'
-import test from 'ava'
-import movieArt from './index'
+const test = require( 'ava' )
+const movieArt = require( './index' )
 
 test( 'returns a url', async t => {
 
@@ -57,15 +57,13 @@ test( 'fetch backdrop and poster', async t => {
 
 } )
 
-test.cb( 'callback returns a url', t => {
+test( 'callback returns a url', async t => {
 
 	t.plan( 1 )
 
-	movieArt( 'crash', ( err, res ) => {
+	await movieArt( 'crash', ( _err, res ) => {
 
-		err && t.end( err )
 		t.is( res.indexOf( 'http' ), 0, 'response is a URL' )
-		t.end()
 
 	} )
 

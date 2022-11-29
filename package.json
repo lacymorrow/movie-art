@@ -4,15 +4,26 @@
   "description": "Fetch art for a movie or tv show: 'Oceans Eleven' ➔ http://path/to/oceans_eleven_poster.jpg",
   "license": "MIT",
   "repository": "lacymorrow/movie-art",
-  "main": "index.js",
-  "browser": "index.js",
-  "bin": {
-    "movie-art": "cli.js"
-  },
   "author": {
     "name": "Lacy Morrow",
     "email": "me@lacymorrow.com",
     "url": "http://lacymorrow.com"
+  },
+  "funding": [
+    {
+      "type": "patreon",
+      "url": "https://patreon.com/lacymorrow"
+    },
+    {
+      "type": "individual",
+      "url": "http://lacymorrow.com/donate"
+    },
+    "https://www.buymeacoffee.com/lm"
+  ],
+  "main": "index.js",
+  "browser": "index.js",
+  "bin": {
+    "movie-art": "cli.js"
   },
   "engines": {
     "node": ">=0.10.0"
@@ -36,11 +47,11 @@
     "path"
   ],
   "devDependencies": {
-    "ava": "^0.25.0",
-    "eslint": "^4.18.1"
+    "ava": "^5.1.0",
+    "eslint": "^8.28.0"
   },
   "dependencies": {
-    "meow": "^4.0.0",
-    "node-fetch": "^2.0.0"
+    "isomorphic-fetch": "^3.0.0",
+    "meow": "^4.0.0"
   }
 }

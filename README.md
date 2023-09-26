@@ -1,5 +1,5 @@
-# movie-art [<img src="https://github.com/lacymorrow/crossover/raw/master/src/static/meta/patreon-button.webp" height="40" align="right" />](https://www.patreon.com/bePatron?u=55065733)
-[![npm version](https://badge.fury.io/js/movie-art.svg)](https://badge.fury.io/js/movie-art) [![Build Status](https://travis-ci.org/lacymorrow/movie-art.svg?branch=master)](https://travis-ci.org/lacymorrow/movie-art) [![Try movie-art on RunKit](https://badge.runkitcdn.com/movie-art.svg)](https://npm.runkit.com/movie-art)
+# movie-art [<img src="https://github.com/lacymorrow/crossover/raw/master/src/static/meta/patreon-button.webp" style="height:40px;" height="40" align="right" />](https://www.patreon.com/bePatron?u=55065733)
+[![npm version](https://badge.fury.io/js/movie-art.svg)](https://badge.fury.io/js/movie-art) [![Try movie-art on RunKit](https://badge.runkitcdn.com/movie-art.svg)](https://npm.runkit.com/movie-art)
 
 > Get a movie (or TV-series) poster and backdrop image url: "Crash" ➔ [http://path/to/crash.jpg](http://image.tmdb.org/t/p/original/pG8LL4LYMCr5uikhx9rewrW8352.jpg)
 

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 200" fill="none">
+  <title>movie-art</title>
+  <g transform="translate(20, 20)">
+    <rect x="0" y="0" width="160" height="160" rx="34" fill="#e11d48"/>
+    <path d="M58 50 L58 110 L113 80 Z" fill="#ffffff"/>
+  </g>
+  <text
+    x="210"
+    y="132"
+    font-family="ui-sans-serif, system-ui, -apple-system, 'Inter', 'Segoe UI', Roboto, sans-serif"
+    font-size="120"
+    font-weight="800"
+    letter-spacing="-6"
+    fill="#1a0b1f"
+  >movie-art</text>
+</svg>

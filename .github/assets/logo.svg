@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="none">
+  <title>movie-art</title>
+  <!-- Rounded square — rose (movie/cinema family) -->
+  <rect x="16" y="16" width="224" height="224" rx="48" fill="#e11d48"/>
+  <!-- Play triangle (off-center to the right for visual balance) -->
+  <path d="M96 76 L96 180 L188 128 Z" fill="#ffffff"/>
+</svg>

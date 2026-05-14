@@ -1,172 +1,147 @@
-> [!IMPORTANT]  
-> This library is considered **feature-complete** and will only receive updates for bug fixes. You may still create an issue if you have a feature request.
+<div align="center">
+  <a href="https://github.com/lacymorrow/movie-art">
+    <img src="https://raw.githubusercontent.com/lacymorrow/movie-art/master/.github/assets/logo-horizontal.svg" alt="movie-art" width="320">
+  </a>
 
-# movie-art [<img src="https://github.com/lacymorrow/crossover/raw/master/src/static/meta/patreon-button.webp" style="height:40px;" height="40" align="right" />](https://www.patreon.com/bePatron?u=55065733)
-[![npm version](https://badge.fury.io/js/movie-art.svg)](https://badge.fury.io/js/movie-art) [![Maintainability](https://api.codeclimate.com/v1/badges/30557712b95ec126712a/maintainability)](https://codeclimate.com/github/lacymorrow/movie-art/maintainability) [![Try movie-art on RunKit](https://badge.runkitcdn.com/movie-art.svg)](https://npm.runkit.com/movie-art)
+  <p><strong>Fetch movie and TV poster + backdrop URLs</strong> ➔ "Crash" → http://path/to/crash.jpg</p>
 
-> Get a movie (or TV-series) poster and backdrop image url: "Crash" ➔ [http://path/to/crash.jpg](http://image.tmdb.org/t/p/original/pG8LL4LYMCr5uikhx9rewrW8352.jpg)
+  <p>
+    <a href="https://www.npmjs.com/package/movie-art"><img alt="npm version" src="https://img.shields.io/npm/v/movie-art?style=flat"></a>
+    <a href="https://www.npmjs.com/package/movie-art"><img alt="npm downloads" src="https://img.shields.io/npm/dm/movie-art?style=flat"></a>
+    <a href="https://github.com/lacymorrow/movie-art/actions/workflows/ci.yml"><img alt="CI" src="https://img.shields.io/github/actions/workflow/status/lacymorrow/movie-art/ci.yml?style=flat&label=CI"></a>
+    <a href="./LICENSE"><img alt="License" src="https://img.shields.io/npm/l/movie-art?style=flat"></a>
+    <a href="https://npm.runkit.com/movie-art"><img alt="Try on RunKit" src="https://img.shields.io/badge/Try-RunKit-f55fa6?style=flat"></a>
+  </p>
 
-[![movie-art](https://github.com/lacymorrow/movie-art/raw/master/demo.svg?sanitize=true)]()
+  <img src="./demo.svg?sanitize=true" alt="movie-art demo" width="700">
+</div>
 
-#### [Try it on RunKit](https://runkit.com/lacymorrow/movie-art) _([Output](https://runkit.io/lacymorrow/movie-art/branches/master?search=Avatar))_
+---
 
+> [!IMPORTANT]
+> This library is **feature-complete** and only receives bug-fix updates. Feature requests still welcome — please open an issue.
 
 ## Features
- * Use anywhere, browser or Node - UMD _([Browser Support](https://caniuse.com/#feat=fetch))_
- * Works in React + NextJS client/server (uses [isomorphic-fetch](https://www.npmjs.com/package/isomorphic-fetch))
- * Promise and Callback API
- * Fetch images for movies or television
- * Poster or backdrop photos
 
+- Use anywhere — browser or Node, UMD bundle ([browser support](https://caniuse.com/#feat=fetch))
+- Works in React + Next.js, client and server, via [isomorphic-fetch](https://www.npmjs.com/package/isomorphic-fetch)
+- Promise **and** callback API
+- Movies **and** television
+- Poster (portrait) or backdrop (landscape) — or both at once
+- Multiple poster sizes from TMDB
 
 ## Install
 
-Using [NPM](https://npmjs.com):
-
 ```bash
-$ npm install movie-art
+npm install movie-art
 ```
 
 In the browser:
 
 ```html
-<!-- movieArt window global -->
-<script type="text/javascript" src="https://unpkg.com/movie-art"></script>
+<!-- movieArt as a window global -->
+<script src="https://unpkg.com/movie-art"></script>
 ```
-(via Unpkg, or via [JSDelivr](https://cdn.jsdelivr.net/npm/movie-art/index.min.js))
 
+Also available via [JSDelivr](https://cdn.jsdelivr.net/npm/movie-art/index.min.js).
 
 ## Usage
 
 ```js
-const movieArt = require('movie-art')
+const movieArt = require("movie-art");
 
-movieArt('Oceans Eleven').then(console.log)
+movieArt("Oceans Eleven").then(console.log);
+//=> http://path/to/oceans_eleven.jpg
 ```
 
-##### Callback
+### Callback form
+
 ```js
-movieArt('Oceans Eleven', (error, response) => {
-    console.log(response)
-    //=> http://path/to/oceans_eleven.jpg
-})
+movieArt("Oceans Eleven", (error, response) => {
+  console.log(response);
+  //=> http://path/to/oceans_eleven.jpg
+});
 ```
 
-##### Usage with size and year options
-```js
-movieArt('Oceans Eleven', {year: '1960', size: 'w92'})
-  .then( response => console.log(response) )
+### Year + size options
 
+```js
+movieArt("Oceans Eleven", { year: "1960", size: "w92" }).then(console.log);
 //=> http://path/to/oceans_eleven_poster_1960_small.jpg
 ```
 
-##### Usage with backdrop and poster (landscape and portrait)
-```js
-movieArt('Oceans Eleven', {output: 'all'})
-  .then( console.log )
+### Backdrop + poster at once
 
+```js
+movieArt("Oceans Eleven", { output: "all" }).then(console.log);
 //=> {
-  poster: http://path/to/oceans_eleven_poster.jpg,
-  backdrop: http://path/to/oceans_eleven_backdrop.jpg,
-}
+//     poster:   "http://path/to/oceans_eleven_poster.jpg",
+//     backdrop: "http://path/to/oceans_eleven_backdrop.jpg",
+//   }
 ```
 
-##### Query television art
-```js
-movieArt('Star Trek: The Original Series', {type: 'tv', output: 'all'})
-  .then( response => console.log(response.poster) )
+### Television
 
+```js
+movieArt("Star Trek: The Original Series", { type: "tv", output: "all" })
+  .then(r => console.log(r.poster));
 //=> http://path/to/star_trek_the_original_series_poster.jpg
 ```
 
+> [!TIP]
+> Try it live — [open in RunKit](https://runkit.com/lacymorrow/movie-art) (here's an [example output](https://runkit.io/lacymorrow/movie-art/branches/master?search=Avatar)).
 
 ## API
 
-### movieArt(search [, options] [, callback])
+### `movieArt(search [, options] [, callback])`
 
-Accepts a movie or television show title (string) as input.
-Returns a Promise which resolves to a string URL.
+Accepts a movie or TV show title and returns a Promise resolving to a URL string (or an object, with `output: "all"`).
 
-#### search
+| Option | Type | Default | Description |
+|---|---|---|---|
+| `year` | `string` | | Optional release year disambiguator |
+| `size` | `"w92" \| "w154" \| "w185" \| "w342" \| "w500" \| "w780" \| "original"` | `"original"` | Poster size |
+| `type` | `"movie" \| "tv"` | `"movie"` | Movie or television search |
+| `output` | `"poster" \| "backdrop" \| "all"` | `"poster"` | What to return |
 
-*Required*  
-Type: `string`
+The third argument may also be a Node-style `(err, response) => void` callback.
 
-Movie to search for.
+## CLI
 
-#### callback(error, response)
+```bash
+npm install --global movie-art
 
-Function to be called when complete or on error.
-
-
-### Options
-
-A JavaScript object with the following properties:
-
-#### year
-
-Type: `string` 
-
-Optional movie year.
-
-
-#### size
-
-Type: `string` 
-
-Requested poster size. 
-*possible values:* `w92`, `w154`, `w185`, `w342`, `w500`, `w780`, `original`
-
-
-#### type
-
-Type: `string`
-
-The type of request: either `tv` or `movie`. Defaults to `movie`.
-*possible values:* `tv`, `movie`
-
-
-#### output
-
-Type: `boolean`
-
-`backdrop` returns a wider, backdrop output backdrop.
-`all` returns an object like `{poster:..., backdrop: ...}`
-Default: `poster` 
-*possible values:* `poster`, `backdrop`, `all`
-
-
-#### CLI Usage
-
+movie-art --help
+#  Usage
+#    $ movie-art <search> [flags]
+#
+#  Flags
+#    --year,   -y  Release year
+#    --size,   -s  w92 | w154 | w185 | w342 | w500 | w780 | original
+#    --type,   -t  tv | movie     (default: movie)
+#    --output, -o  poster | backdrop | all  (default: poster)
+#
+#  Example
+#    $ movie-art 'Oceans Eleven' --year 1960 --size w92
+#    => http://path/to/oceans_eleven_poster_1960_small.jpg
 ```
-$ npm install -g movie-art
-
-$ movie-art --help
-
-Usage
-  $ movie-art movie [year] [size] [type] [output]
-
-Options
-  --year,        -y  Release date year
-  --size,        -s  Possible values: [w92, w154, w185, w342, w500, w780, original]
-  --type,        -t  Possible values: [tv, movie] 
-  --output, -o  Possible values: [poster, backdrop, all]
-
-Example
-  $ movie-art 'Oceans Eleven' --year 1960  --size w92
-  //=> http://path/to/oceans_eleven_poster_1960_small.jpg
-```
-
 
 ## Related
 
-* [album-art](https://github.com/lacymorrow/album-art)
-* [movie-info](https://github.com/lacymorrow/movie-info)
-* [movie-trailer](https://github.com/lacymorrow/movie-trailer)
+Part of a small family of media-data utilities:
 
+- [album-art](https://github.com/lacymorrow/album-art) — Fetch album and artist cover art.
+- [movie-info](https://github.com/lacymorrow/movie-info) — Get info, images, and ratings about a movie.
+- [movie-trailer](https://github.com/lacymorrow/movie-trailer) — Find the trailer for a movie.
+
+## Acknowledgments
+
+- [TMDB](https://www.themoviedb.org) — image data (subject to the [TMDB Terms of Service](https://www.themoviedb.org/documentation/api/terms-of-use)).
 
 ## License
 
-This package uses data from TMDB. You may consult [TMDB terms of service](https://www.themoviedb.org/documentation/api/terms-of-use) for usage rights.
+[MIT](./LICENSE) © [Lacy Morrow](https://lacymorrow.com)
 
-[MIT](http://opensource.org/licenses/MIT) © [Lacy Morrow](http://lacymorrow.com)
+<div align="center">
+  <sub>If movie-art saved you time, consider <a href="https://github.com/sponsors/lacymorrow">sponsoring on GitHub</a>, <a href="https://patreon.com/lacymorrow">supporting on Patreon</a>, or <a href="https://buymeacoffee.com/lm">buying a coffee</a>.</sub>
+</div>

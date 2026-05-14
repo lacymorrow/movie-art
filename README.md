@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://github.com/lacymorrow/movie-art">
-    <img src=".github/assets/logo-horizontal.svg" alt="movie-art" width="320">
+    <img src="https://raw.githubusercontent.com/lacymorrow/movie-art/master/.github/assets/logo-horizontal.svg" alt="movie-art" width="320">
   </a>
 
   <p><strong>Fetch movie and TV poster + backdrop URLs</strong> ➔ "Crash" → http://path/to/crash.jpg</p>
@@ -113,13 +113,13 @@ npm install --global movie-art
 
 movie-art --help
 #  Usage
-#    $ movie-art movie [year] [size] [type] [output]
+#    $ movie-art <search> [flags]
 #
-#  Options
+#  Flags
 #    --year,   -y  Release year
 #    --size,   -s  w92 | w154 | w185 | w342 | w500 | w780 | original
-#    --type,   -t  tv | movie
-#    --output, -o  poster | backdrop | all
+#    --type,   -t  tv | movie     (default: movie)
+#    --output, -o  poster | backdrop | all  (default: poster)
 #
 #  Example
 #    $ movie-art 'Oceans Eleven' --year 1960 --size w92

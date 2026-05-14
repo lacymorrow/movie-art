@@ -39,15 +39,17 @@
     "index.js"
   ],
   "keywords": [
-    "cli",
-    "bin",
-    "app",
     "movie",
-    "image",
+    "tv",
+    "television",
     "poster",
-    "url",
-    "uri",
-    "path"
+    "backdrop",
+    "art",
+    "image",
+    "tmdb",
+    "themoviedb",
+    "cli",
+    "bin"
   ],
   "devDependencies": {
     "ava": "^5.3.1",

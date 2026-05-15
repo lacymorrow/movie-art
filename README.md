@@ -1,6 +1,9 @@
 <div align="center">
   <a href="https://github.com/lacymorrow/movie-art">
-    <img src="https://raw.githubusercontent.com/lacymorrow/movie-art/master/.github/assets/logo-horizontal.svg" alt="movie-art" width="320">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/lacymorrow/movie-art/master/.github/assets/logo-horizontal-dark.svg">
+      <img src="https://raw.githubusercontent.com/lacymorrow/movie-art/master/.github/assets/logo-horizontal.svg" alt="movie-art" width="320">
+    </picture>
   </a>
 
   <p><strong>Fetch movie and TV poster + backdrop URLs</strong> ➔ "Crash" → http://path/to/crash.jpg</p>
